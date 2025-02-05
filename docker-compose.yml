@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  api:
+    container_name: vravlo-mag-tst-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    volumes:
+      - .:/opt/app
+      - /opt/app/node_modules
+    ports:
+      - ${SERVICE_PORT}:${SERVICE_PORT}
+    environment:
+      DB_HOST: postgres
+    env_file:
+      - .env
+    networks:
+      - app-network
+    depends_on:
+      - postgres
+  postgres:
+    container_name: vravlo-mag-tst-postgres
+    image: postgres:16.1
+    networks:
+      - app-network
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_DB: ${DB_NAME}
+      PG_DATA: /var/lib/postgresql/data
+    ports:
+      - ${DB_PORT}:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+networks:
+  app-network:
+volumes:
+  pgdata: {}
