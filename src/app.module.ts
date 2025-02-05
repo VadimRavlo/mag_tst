@@ -6,6 +6,8 @@ import { ManagersModule } from './managers/managers.module';
 import { PoolsModule } from './fundamentals/pools/pools.module';
 import { TicksModule } from './fundamentals/ticks/ticks.module';
 import { TheGraphModule } from './providers/thegraph/thegraph.module';
+import { BullModule } from './providers/bull/bull.module';
+import { CronSchedulerModule } from './cron-scheduler/cron-scheduler.module';
 
 @Module({
   imports: [
@@ -14,6 +16,8 @@ import { TheGraphModule } from './providers/thegraph/thegraph.module';
     PoolsModule,
     TicksModule,
     TheGraphModule,
+    BullModule,
+    CronSchedulerModule,
     ManagersModule,
   ],
   controllers: [],

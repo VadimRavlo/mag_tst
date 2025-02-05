@@ -38,6 +38,25 @@ export class ConfigurationDto {
   DB_LOGGING: string;
 
   /**
+   * Redis's section
+   */
+  @IsNotEmpty()
+  @IsString()
+  REDIS_HOST: string;
+
+  @IsNotEmpty()
+  @IsString()
+  REDIS_PORT: string;
+
+  @IsNotEmpty()
+  @IsString()
+  REDIS_USER: string;
+
+  @IsNotEmpty()
+  @IsString()
+  REDIS_PASSWORD: string;
+
+  /**
    * Subgraph's section
    */
   @IsNotEmpty()

@@ -5,6 +5,7 @@ import * as fs from 'node:fs';
 import * as dotenv from 'dotenv';
 import * as path from 'node:path';
 import { IDatabaseOptions } from './types/database-options.interface';
+import { RedisOptions } from 'ioredis';
 
 @Injectable()
 export class ConfigurationService {
@@ -68,6 +69,15 @@ export class ConfigurationService {
       password: this.get('DB_PASSWORD'),
       database: this.get('DB_NAME'),
       logging: !!this.get('DB_LOGGING'),
+    };
+  }
+
+  public getRedisConfigurations(): RedisOptions {
+    return {
+      host: this.get('REDIS_HOST'),
+      port: +this.get('REDIS_PORT'),
+      username: this.get('REDIS_USER'),
+      password: this.get('REDIS_PASSWORD'),
     };
   }
 }
