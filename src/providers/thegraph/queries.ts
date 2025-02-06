@@ -1,6 +1,6 @@
-export const fetchPoolsQuery = `
-  query pools($blockNumber: Int) {
-    pools(block: { number: $blockNumber }) {
+export const fetchPoolsSequentialQuery = `
+  query pools($first: Int, $skip: Int,) {
+    pools(first: $first, skip: $skip) {
       id
       token0 {
         id
@@ -24,14 +24,13 @@ export const fetchPoolsQuery = `
   }
 `;
 
-export function fetchTicksQuery(pageSize: number): string {
+export function fetchTicksQuery(): string {
   return `
-    query ticks($poolId: String!, $skip: Int, $blockNumber: Int) {
+    query ticks($poolId: String!, $pageSize:Int, $skip: Int, $blockNumber: Int) {
       ticks(
-        first: ${pageSize}
+        first: $pageSize
         skip: $skip
-        where: { pool: $poolId }
-        block: { number: $blockNumber }
+        where: { pool: $poolId, createdAtBlockNumber_gt: $blockNumber }
       ) {
         id
         poolAddress

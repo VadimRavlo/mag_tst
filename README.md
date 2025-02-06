@@ -20,7 +20,7 @@ Launch it from root directory
 $ docker-compose up
 ```
 
-Using this command will start 4 containers: `postgres` and `api`.
+Using this command will start containers: `postgres`, `redis` and `api`.
 
 To disable any of these containers and to use an existing one please delete the related section in `docker-compose.yml`
 

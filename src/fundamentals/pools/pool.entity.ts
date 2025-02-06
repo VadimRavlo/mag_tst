@@ -26,11 +26,14 @@ export class Pool extends BaseEntity {
   @Column()
   feeTier: number;
 
-  @Column()
+  @Column({ type: 'numeric', precision: 50, scale: 0, default: '0' })
   liquidity: string;
 
-  @Column()
+  @Column({ type: 'numeric', precision: 50, scale: 0, default: '0' })
   sqrtPrice: string;
+
+  @Column({ type: 'numeric', precision: 50, scale: 25, default: '0' })
+  adjustedPrice: string;
 
   @Column()
   tick: number;

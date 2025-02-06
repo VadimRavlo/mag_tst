@@ -11,10 +11,10 @@ export class Tick extends BaseEntity {
   @Column()
   poolAddress: string;
 
-  @Column()
+  @Column({ type: 'numeric', precision: 50, scale: 0, default: '0' })
   liquidityGross: string;
 
-  @Column()
+  @Column({ type: 'numeric', precision: 50, scale: 0, default: '0' })
   liquidityNet: string;
 
   @Column('decimal')

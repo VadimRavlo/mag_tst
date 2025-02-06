@@ -16,7 +16,7 @@ export class BaseService<T extends ObjectLiteral> {
     this.repository = repository;
   }
 
-  public async create(
+  public async save(
     data: DeepPartial<T>,
     entityManager?: EntityManager,
   ): Promise<T> {

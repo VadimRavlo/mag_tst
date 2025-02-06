@@ -1,3 +1,3 @@
-import { CreatePoolsAndTicksTables1738748516377 } from './1738748516377-CreatePoolsAndTicksTables';
+import { AddBlockchainTables1738837319344 } from './1738837319344-AddBlockchainTables';
 
-export const migrations = [CreatePoolsAndTicksTables1738748516377];
+export const migrations = [AddBlockchainTables1738837319344];
