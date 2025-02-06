@@ -53,10 +53,10 @@ Please use `.env` file for details.
 If you previously have started another PostgreSQL container on `localhost:5432` you have to stop the container before running the app.
 
 ## File structure
+We are using n-layer architecture to avoid any circular dependencies in the future and to build scalable application.
 
 In case creating a new service, module, controller, entity or spec file, please use default file structure:
 * all providers, like database, redis, message queues, external APIs should be stored by `src/providers`
-* in order to provide additional logs security, you should use logger, stored by `src/logger`
 * directory `src/modules` uses default file structure:
   * `src/modules/configurations` only to store configuration service with DTO for `.env` file (in order to check validity of `.env` content)
   * `src/modules/cron-scheduler` only to store cron schedule (without any logic)
@@ -72,11 +72,12 @@ The `BaseEntity` have 3 mandatory fields for any new entity:
 * `id: uuid`
 * `createdAt: timestamp with tz`
 * `updatedAt: timestamp with tz`
+* onchain-related fields
 
 You don't need to set this fields additionally (please avoid code duplication).
 
 In similar way you should use `BaseService` to extending this classes in your fundamentals services and DTOs:
-* `/src/modules/fundamentals/base/base.service.ts` - implemented `create()`, `find()`, `findOne()`, `saveMany()` etc. public methods
+* `/src/modules/fundamentals/base/base.service.ts` - implemented `save()`, `find()`, `findOne()`, `saveMany()` etc. public methods
 
 For all methods of `BaseService`, in case you need database transactions, you have to use `entityManager: EntityManager` - manager, provided by TypeORM's `DataSource`.
 EntityManager is always the last optional parameter of each `BaseService's` extended method.

@@ -83,10 +83,12 @@ export class UniswapSyncManagerService {
           : updatedBlockNumber;
     });
 
+    // only new ticks can be added since tick's data cannot be changed onchain
+    // new ticks starting from the "lastBlock handled" will be added
     await this.ticksService.saveMany(ticks);
     this.logger.log(`Synchronized ${ticks.length} ticks for pool ${poolId}.`);
 
-    return blockNumber;
+    return updatedBlockNumber;
   }
 
   private mapPoolData(poolData: any): Pool {
@@ -104,13 +106,15 @@ export class UniswapSyncManagerService {
     pool.feeTier = poolData.feeTier;
     pool.liquidity = poolData.liquidity;
     pool.sqrtPrice = poolData.sqrtPrice;
+    pool.tick = poolData.tick;
+    pool.volumeUSD = poolData.volumeUSD;
+    pool.txCount = poolData.txCount;
+
+    // adjusted human-readable price calculation logic
     pool.adjustedPrice = (
       (+pool.sqrtPrice / 2 ** 96) ** 2 *
       (10 ** pool.token0Decimals / 10 ** pool.token1Decimals)
     ).toString();
-    pool.tick = poolData.tick;
-    pool.volumeUSD = poolData.volumeUSD;
-    pool.txCount = poolData.txCount;
 
     return pool;
   }

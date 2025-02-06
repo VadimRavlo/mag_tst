@@ -15,7 +15,7 @@ export class CronSchedulerService implements OnModuleInit {
   ) {}
 
   public async onModuleInit(): Promise<void> {
-    // await this.startTimeSlotsSeeding();
+    await this.startTimeSlotsSeeding();
   }
 
   private async startTimeSlotsSeeding(): Promise<void> {

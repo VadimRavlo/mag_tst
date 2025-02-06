@@ -14,7 +14,7 @@ export class CronManagerService {
   }
 
   async startUniswapSyncJob(job: Job<unknown>): Promise<void> {
-    this.logger.debug('Uniswap sync job in the process...', job.data);
+    this.logger.debug('UniswapV3 sync job in the process...', job.data);
     await this.uniswapSyncManagerService.synchronizeAllPoolsAndTicks();
   }
 }
